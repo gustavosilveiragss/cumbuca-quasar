@@ -1,6 +1,7 @@
 <template>
   <q-page class="items-center justify-evenly q-pa-md">
     <q-virtual-scroll
+      v-if="menuStore.menu.length"
       :items="menuStore.menu"
       class="row items-center justify-evenly"
       virtual-scroll-horizontal
@@ -12,9 +13,23 @@
           :_price="item.price"
           :_description="item.description"
           :_image="item.imageUrl"
+          @updateName="updateMenuItemName(item.menuItemId, $event)"
+          @deleteItem="deleteMenuItem(item.menuItemId)"
         />
       </template>
     </q-virtual-scroll>
+    
+    <Transition
+      appear
+      enter-active-class="animated jackInTheBox"
+    >
+      <div
+        v-if='!menuStore.menu.length'
+        class="text-h5 text-center"
+      >
+        No menu items found
+      </div>
+    </Transition>
 
     <q-btn
       label="Add New Item"
@@ -23,7 +38,6 @@
       class="q-mb-md"
     />
 
-    <!-- Add Menu Item Dialog -->
     <q-dialog v-model="showDialog">
       <q-card>
         <q-card-section>
@@ -116,6 +130,19 @@ function addItem() {
   price.value = 0;
   description.value = '';
   imageUrl.value = '';
+}
+
+function updateMenuItemName(menuItemId: number, newName: string) {
+  const item = menuStore.menu.find((item) => item.menuItemId === menuItemId);
+  if (!item) {
+    return;
+  }
+  item.name = newName;
+  menuStore.editMenuItem(item);
+}
+
+function deleteMenuItem(menuItemId: number) {
+  menuStore.deleteMenuItem(menuItemId);
 }
 </script>
 

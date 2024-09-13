@@ -31,8 +31,24 @@ export const useMenuStore = defineStore('menuStore', () => {
     menu.value.push(menuItem);
   }
 
+  function deleteMenuItem(menuItemId: number) {
+    const index = menu.value.findIndex(
+      (item) => item.menuItemId === menuItemId
+    );
+    menu.value.splice(index, 1);
+  }
+
+  function editMenuItem(menuItem: MenuItem) {
+    const index = menu.value.findIndex(
+      (item) => item.menuItemId === menuItem.menuItemId
+    );
+    menu.value[index] = menuItem;
+  }
+
   return {
     menu,
     addMenuItem,
+    deleteMenuItem,
+    editMenuItem,
   };
 });

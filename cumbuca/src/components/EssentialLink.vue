@@ -2,19 +2,20 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
     :href="link"
+    :target="openInNewTab ? '_blank' : '_self'"
+    class="q-mb-xs"
   >
     <q-item-section
       v-if="icon"
       avatar
     >
-      <q-icon :name="icon" />
+      <q-icon :name="icon" class="white-icon" />
     </q-item-section>
 
     <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>{{ caption }}</q-item-label>
+      <q-item-label class="white-text">{{ title }}</q-item-label>
+      <q-item-label caption class="white-text">{{ caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -29,11 +30,22 @@ export interface EssentialLinkProps {
   caption?: string;
   link?: string;
   icon?: string;
+  openInNewTab?: boolean;
 };
 
 withDefaults(defineProps<EssentialLinkProps>(), {
   caption: '',
   link: '#',
   icon: '',
+  openInNewTab: false,
 });
 </script>
+
+<style scoped>
+.white-icon {
+  color: white;
+}
+.white-text {
+  color: white;
+}
+</style>

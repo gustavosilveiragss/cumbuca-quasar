@@ -14,8 +14,29 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <!-- drawer content -->
+    <q-drawer
+      v-model="leftDrawerOpen"
+      class="bg-primary"
+      :width="250"
+      :breakpoint="767"
+      show-if-above
+      bordered
+    >
+      <q-list>
+        <q-item-label
+          class="text-white"
+          header
+        >
+          Navigation
+        </q-item-label>
+
+        <EssentialLink
+          v-for="link in navLinks"
+          :key="link.title"
+          v-bind="link"
+          :openInNewTab="link.openInNewTab"
+        />
+      </q-list>
     </q-drawer>
 
     <q-page-container>
@@ -25,19 +46,24 @@
   </q-layout>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref, defineAsyncComponent } from 'vue'
+const EssentialLink = defineAsyncComponent(() => import('components/EssentialLink.vue'))
 
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false)
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
+const navLinks = [
+  {
+    title: 'Menu',
+    icon: 'savings',
+    link: '/#/',
+    openInNewTab: false
+  },
+  {
+    title: 'Settings',
+    icon: 'settings',
+    link: '/#/settings',
+    openInNewTab: false
   }
-}
+]
 </script>
