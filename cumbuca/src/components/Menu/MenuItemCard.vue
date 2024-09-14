@@ -1,61 +1,66 @@
 <template>
-  <q-card class="menu-item-card q-mb-md shadow-2">
-    <q-card-section class="image-section">
-      <q-icon
-        name="close"
-        class="delete-icon"
-        @click="confirmDelete"
-        color="red"
-        size="md"
-      />
-      <q-img
-        :src="props._image"
-        :alt="props._name"
-        class="menu-image rounded-borders"
-      />
-    </q-card-section>
+  <q-slide-item
+    class="menu-item-card q-mb-md shadow-2"
+    @up="confirmDelete"
+  >
+    <q-card>
+      <q-card-section class="image-section">
+        <q-icon
+          name="close"
+          class="delete-icon"
+          @click="confirmDelete"
+          color="red"
+          size="md"
+        />
+        <q-img
+          :src="props._image"
+          :alt="props._name"
+          class="menu-image rounded-borders"
+        />
+      </q-card-section>
 
-    <q-card-section class="content-section">
-      <q-card-title
-        class="menu-title text-primary cursor-pointer"
-        @click="editName"
-      >
-        {{ props._name }}
-      </q-card-title>
+      <q-card-section class="content-section">
+        <q-card-title
+          class="menu-title text-primary cursor-pointer"
+          @click="editName"
+        >
+          {{ props._name }}
+        </q-card-title>
 
-      <q-card-subtitle class="menu-price text-secondary">
-        ${{ Number(props._price).toFixed(2) }}
-      </q-card-subtitle>
+        <q-card-subtitle class="menu-price text-secondary">
+          ${{ Number(props._price).toFixed(2) }}
+        </q-card-subtitle>
 
-      <div class="menu-description">
-        {{ props._description }}
-      </div>
-    </q-card-section>
+        <div class="menu-description">
+          {{ props._description }}
+        </div>
+      </q-card-section>
+    </q-card>
 
     <q-dialog v-model="showNameDialog">
-        <q-card>
-          <q-card-section>
-            <div class="text-h6">Edit Name</div>
-          </q-card-section>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Edit Name</div>
+        </q-card-section>
 
-          <q-card-section>
-            <q-input
-              v-model="editableName"
-              label="Name"
-              outlined
-              dense
-              v-select-all
-            />
-          </q-card-section>
+        <q-card-section>
+          <q-input
+            v-model="editableName"
+            label="Name"
+            outlined
+            dense
+            v-select-all
+          />
+        </q-card-section>
 
-          <q-card-actions align="right">
-            <q-btn flat label="Cancel" color="primary" @click="cancelEdit" />
-            <q-btn flat label="Save" color="primary" @click="saveName" />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" @click="cancelEdit" />
+          <q-btn flat label="Save" color="primary" @click="saveName" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 
-      <q-dialog v-model="showConfirmDialog">
+    <q-dialog v-model="showConfirmDialog">
       <q-card>
         <q-card-section>
           <div class="text-h6">Confirm Deletion</div>
@@ -68,12 +73,11 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-  </q-card>
+  </q-slide-item>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import vSelectAll from 'src/directives/directiveSelectAll';
 import { useStoreSettings } from 'src/stores/settingsStore';
 
 const storeSettings = useStoreSettings();
@@ -91,6 +95,7 @@ const emit = defineEmits(['updateName', 'deleteItem']);
 const showNameDialog = ref(false);
 const editableName = ref('');
 const showConfirmDialog = ref(false);
+
 function editName() {
   editableName.value = props._name;
   showNameDialog.value = true;
@@ -127,11 +132,9 @@ function deleteItem() {
 }
 </script>
 
-
 <style scoped>
 .menu-item-card {
   width: 280px;
-  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

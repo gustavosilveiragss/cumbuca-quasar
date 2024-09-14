@@ -1,23 +1,25 @@
 <template>
   <q-page class="items-center justify-evenly q-pa-md">
-    <q-virtual-scroll
-      v-if="menuStore.menu.length"
-      :items="menuStore.menu"
-      class="row items-center justify-evenly"
-      virtual-scroll-horizontal
-    >
-      <template v-slot="{ item }">
-        <MenuItemCard
-          :_menuItemId="item.menuItemId"
-          :_name="item.name"
-          :_price="item.price"
-          :_description="item.description"
-          :_image="item.imageUrl"
-          @updateName="updateMenuItemName(item.menuItemId, $event)"
-          @deleteItem="deleteMenuItem(item.menuItemId)"
-        />
-      </template>
-    </q-virtual-scroll>
+    <Sortable
+        v-if="menuStore.menu.length"
+        :list='menuStore.menu'
+        item-key='menuItemId'
+        tag='div'
+        class="row items-center justify-evenly q-mx-xl"
+        @end='menuStore.sortEnd'
+      >
+        <template #item='{element}'>
+          <MenuItemCard
+            :_menuItemId="element.menuItemId"
+            :_name="element.name"
+            :_price="element.price"
+            :_description="element.description"
+            :_image="element.imageUrl"
+            @updateName="updateMenuItemName(element.menuItemId, $event)"
+            @deleteItem="deleteMenuItem(element.menuItemId)"
+          />
+        </template>
+    </Sortable>
     
     <Transition
       appear
@@ -99,6 +101,7 @@
 import { defineAsyncComponent, ref } from 'vue';
 import { useMenuStore } from '../stores/menuStore';
 import { MenuItem } from '../models/MenuItem';
+import { Sortable } from 'sortablejs-vue3';
 
 const MenuItemCard = defineAsyncComponent(() => import('../components/Menu/MenuItemCard.vue'));
 

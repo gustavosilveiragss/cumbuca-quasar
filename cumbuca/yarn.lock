@@ -2769,6 +2769,19 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+sortablejs-vue3@^1.2.11:
+  version "1.2.11"
+  resolved "https://registry.npmjs.org/sortablejs-vue3/-/sortablejs-vue3-1.2.11.tgz"
+  integrity sha512-oKOA6N7yu2ktmqYXPHlPTQWbe9G4v16mn5ewogb+Ybc9Bk1Y+MIURrpbgedEv7f9TS5Bptvh81HGjazh5FEyJw==
+  dependencies:
+    sortablejs "^1.15.0"
+    vue "^3.3.7"
+
+sortablejs@^1.15.0, sortablejs@^1.15.3:
+  version "1.15.3"
+  resolved "https://registry.npmjs.org/sortablejs/-/sortablejs-1.15.3.tgz"
+  integrity sha512-zdK3/kwwAK1cJgy1rwl1YtNTbRmc8qW/+vgXf75A7NHag5of4pyI6uK86ktmQETyWRH7IGaE73uZOOBcGxgqZg==
+
 source-map-js@^1.2.0, "source-map-js@>=0.6.2 <2.0.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.0.tgz"
@@ -3122,7 +3135,7 @@ vue-tsc@^2.0.29, vue-tsc@>=2.0.0:
     "@vue/language-core" "2.0.29"
     semver "^7.5.4"
 
-"vue@^2.6.14 || ^3.3.0", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.2.29, vue@^3.4.18, vue@3.4.38:
+"vue@^2.6.14 || ^3.3.0", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.2.29, vue@^3.3.7, vue@^3.4.18, vue@3.4.38:
   version "3.4.38"
   resolved "https://registry.npmjs.org/vue/-/vue-3.4.38.tgz"
   integrity sha512-f0ZgN+mZ5KFgVv9wz0f4OgVKukoXtS3nwET4c2vLBGQR50aI8G0cqbFtLlX9Yiyg3LFGBitruPHt2PxwTduJEw==
